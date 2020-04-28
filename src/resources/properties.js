@@ -10,7 +10,7 @@ const SOCKET_EMIT_PLAYER_JOINED = 'playerJoined';
 const SOCKET_EMIT_UPDATE_GAMESTATE = 'updateGameState';
 const SOCKET_EMIT_PLAYER_REJECTED = 'playerRejected';
 
-module.exports = {
+export {
     SOCKET_ON_BROADCAST_GAMESTATE,
     SOCKET_ON_JOIN_ROOM,
     SOCKET_ON_SOCKETID,

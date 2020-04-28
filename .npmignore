@@ -2,6 +2,7 @@
 
 src/
 test/
+example/
 .gitginore
 .npmignore
 .babelrc
