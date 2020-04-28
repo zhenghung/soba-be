@@ -11,7 +11,7 @@ const {
     SOCKET_EMIT_PLAYER_REJECTED
 } = require('./resources/properties');
 
-function SetupSobaListeners(socket, config) {
+function SetupSobaListeners(io, socket, config) {
 
     /** Client requesting a SocketId,
      * sent back to client */
