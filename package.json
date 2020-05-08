@@ -1,7 +1,7 @@
 {
   "name": "soba-be",
   "description": "The backend socket.io listeners to handle soba-game's HOCs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Zheng Hung Chuah",
   "main": "dist/index.min.js",
   "scripts": {
