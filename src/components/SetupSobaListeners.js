@@ -1,17 +1,25 @@
 import {
-    SOCKET_ON_JOIN_ROOM,
-    SOCKET_ON_SOCKETID,
+    SOCKET_EMIT_PLAYER_JOINED,
+    SOCKET_EMIT_PLAYER_JOINED_FAILED,
+    SOCKET_EMIT_PLAYER_REJECTED,
+    SOCKET_EMIT_SOCKETID,
+    SOCKET_EMIT_UPDATE_GAMESTATE,
     SOCKET_ON_BROADCAST_GAMESTATE,
+    SOCKET_ON_JOIN_ROOM,
     SOCKET_ON_LEAVE_ROOM,
     SOCKET_ON_REJECT_PLAYER,
-    SOCKET_EMIT_SOCKETID,
-    SOCKET_EMIT_PLAYER_JOINED_FAILED,
-    SOCKET_EMIT_PLAYER_JOINED,
-    SOCKET_EMIT_UPDATE_GAMESTATE,
-    SOCKET_EMIT_PLAYER_REJECTED
+    SOCKET_ON_SOCKETID,
 } from '../resources/properties';
 
+const defaultConfig = {
+    logging: false,
+};
+
 function SetupSobaListeners(io, socket, config) {
+    config = {
+        ...defaultConfig,
+        ...config,
+    };
 
     /** Client requesting a SocketId,
      * sent back to client */
@@ -29,9 +37,9 @@ function SetupSobaListeners(io, socket, config) {
             socket.join(roomCode);
             socket.emit(SOCKET_EMIT_SOCKETID, {socketId: socket.id});
             if (!isHost && io.sockets.adapter.rooms[roomCode].length < 2) {
-                if (config.logging) console.log("Invalid RoomCode");
+                if (config.logging) console.log('Invalid RoomCode');
                 socket.leave(roomCode);
-                socket.emit(SOCKET_EMIT_PLAYER_JOINED_FAILED, {playerName, message: "Invalid Room"});
+                socket.emit(SOCKET_EMIT_PLAYER_JOINED_FAILED, {playerName, message: 'Invalid Room'});
             } else {
                 if (config.logging) console.log(`Player ${playerName} Joined`);
                 io.in(roomCode).emit(SOCKET_EMIT_PLAYER_JOINED, {isHost, playerName, socketId: socket.id});
