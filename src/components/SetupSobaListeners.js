@@ -57,6 +57,7 @@ function SetupSobaListeners(io, socket, config) {
 
     /** Rejected player leaves room */
     socket.on(SOCKET_ON_LEAVE_ROOM, (roomCode, callback) => {
+        if (config.logging) console.log(`Player leaving room ${roomCode}`);
         socket.leave(roomCode);
         callback();
     });
